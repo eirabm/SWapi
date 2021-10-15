@@ -1,63 +1,47 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-// import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-// import * as apiClient from './api';
+import { RootState } from "..";
 
-// export type Char = {
-//   name: string
-//   gender: string,
+export const swApi = createApi({
+  reducerPath: 'swApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
+  endpoints: (builder) => ({
+    getCharacters: builder.query({
+      query: (id: number) => `people/${id}`,
+    }),
+    searchPeople: builder.query({
+      query: (searchInput: string) => `people/?search=${searchInput}`,
+    }),
+    getSpecies: builder.query({
+      query: (id: number) => `species/${id}`,
+    }),
+  }),
+})
 
-// };
+export const { useGetCharactersQuery, useGetSpeciesQuery } = swApi;
 
-// export type UserListState = {
-//   data: Char[];
-//   loading: boolean;
-//   error: boolean;
-//   nextPage: number;
-// };
+export interface searchBy {
+  topic: string;
+}
 
-// const initialState: UserListState = {
-//   data: [],
-//   loading: false,
-//   error: true,
-//   nextPage: 1,
-// };
+const initialState: searchBy = {
+  topic: "people"
+};
 
-// export const fetchData = createAsyncThunk<{data: Char[]}, {page: number}>(
-//   'fetchData',
-//   async ({page}) => {
-//     const response = await apiClient.fetchData(page);
-//     if (response.kind === 'success') {
-//       console.log(response.body)
+const searchSlice = createSlice({
+  name: 'searchBy',
+  initialState,
+  reducers:{
+    changeSearch(state, action) {
+      return state.topic = action.payload;
+    },
+  }
+})
 
-//       return {
-//         data: response.body ?? [],
-//       };
-//     } else {
-//       throw 'Error fetching users';
-//     }
-//   },
-// );
 
-// const dataListSlice = createSlice({
-//   name: 'userList',
-//   initialState: initialState,
-//   reducers: {},
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchData.pending, (state) => {
-//         state.loading = true;
-//         state.error = false;
-//       })
-//       .addCase(fetchData.fulfilled, (state, action) => {
-//         state.nextPage += 1;
-//         state.data = state.data.concat(action.payload.data);
-//         state.loading = false;
-//       })
-//       .addCase(fetchData.rejected, (state) => {
-//         state.error = true;
-//         state.loading = false;
-//       });
-//   },
-// });
 
-// export default dataListSlice.reducer;
+export const { changeSearch } = searchSlice.actions;
+export const getSearchSelector = (state: RootState) => initialState.topic;
+export default searchSlice.reducer;
+

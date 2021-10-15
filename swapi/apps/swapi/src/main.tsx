@@ -9,15 +9,17 @@ import { ApiProvider } from '@reduxjs/toolkit/query/react'
 import { swApi } from '@swapi/store'
 
 import { Provider } from 'react-redux';
+import { store } from '@swapi/store'
 
 ReactDOM.render(
-  <ApiProvider api={swApi}>
-    <StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </StrictMode>
-  </ApiProvider>
-  ,
+  <Provider store={store}>
+    <ApiProvider api={swApi}>
+      <StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </StrictMode>
+    </ApiProvider>
+  </Provider>,
   document.getElementById('root')
 );
