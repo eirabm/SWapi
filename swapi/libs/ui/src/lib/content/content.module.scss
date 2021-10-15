@@ -1,0 +1,15 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+
+  .characterCard {
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+
+    img {
+      margin: 10px;
+    }
+  }
+}

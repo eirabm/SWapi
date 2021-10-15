@@ -5,27 +5,19 @@ import App from './app/app';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import { configureStore } from '@reduxjs/toolkit';
+import { ApiProvider } from '@reduxjs/toolkit/query/react'
+import { swApi } from '@swapi/store'
+
 import { Provider } from 'react-redux';
 
-import { DATAMANAGER_FEATURE_KEY, dataManagerReducer } from '@swapi/store';
-
-const store = configureStore({
-  reducer: { [DATAMANAGER_FEATURE_KEY]: dataManagerReducer },
-  // Additional middleware can be passed to this array
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  devTools: process.env.NODE_ENV !== 'production',
-  // Optional Redux store enhancers
-  enhancers: [],
-});
-
 ReactDOM.render(
-  <Provider store={store}>
+  <ApiProvider api={swApi}>
     <StrictMode>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </StrictMode>
-  </Provider>,
+  </ApiProvider>
+  ,
   document.getElementById('root')
 );

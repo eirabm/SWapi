@@ -1,14 +1,10 @@
-import './store.module.scss';
+import { configureStore } from '@reduxjs/toolkit';
+import dataListSlice from './data-manager.slice';
 
-/* eslint-disable-next-line */
-export interface StoreProps {}
+const store = configureStore({
+  reducers: {
+  },
 
-export function Store(props: StoreProps) {
-  return (
-    <div>
-      <h1>Welcome to Store!</h1>
-    </div>
-  );
-}
+});
 
-export default Store;
+export default store;

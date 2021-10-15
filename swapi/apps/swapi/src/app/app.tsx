@@ -1,14 +1,12 @@
 import styles from './app.module.scss';
 
-import { Route, Link } from 'react-router-dom';
-
-import { Ui } from '@swapi/ui';
-
-import { Store } from '@swapi/store';
+import { NavBar, Content } from '@swapi/ui';
 
 export function App() {
   return (
     <div className={styles.app}>
+      <NavBar />
+      <Content />
 
     </div>
   );
