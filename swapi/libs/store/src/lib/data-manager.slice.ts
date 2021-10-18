@@ -1,47 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-import { RootState } from "..";
-
-export const swApi = createApi({
-  reducerPath: 'swApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://swapi.dev/api/' }),
-  endpoints: (builder) => ({
-    getCharacters: builder.query({
-      query: (id: number) => `people/${id}`,
-    }),
-    searchPeople: builder.query({
-      query: (searchInput: string) => `people/?search=${searchInput}`,
-    }),
-    getSpecies: builder.query({
-      query: (id: number) => `species/${id}`,
-    }),
-  }),
-})
-
-export const { useGetCharactersQuery, useGetSpeciesQuery } = swApi;
+import { configureStore } from '@reduxjs/toolkit';
+import { swApi } from "..";
 
 export interface searchBy {
-  topic: string;
+  topic: string,
+  sortBy: string,
+  actualPage: number,
 }
 
 const initialState: searchBy = {
-  topic: "people"
+  topic: "people",
+  sortBy: "name",
+  actualPage: 1
 };
 
 const searchSlice = createSlice({
   name: 'searchBy',
   initialState,
-  reducers:{
-    changeSearch(state, action) {
-      return state.topic = action.payload;
+  reducers: {
+    changeSearch: (state, action) => {
+      state.topic = action.payload
     },
+    changeSort: (state, action) => {
+      state.sortBy = action.payload
+    }
   }
 })
 
+export const { changeSearch, changeSort } = searchSlice.actions;
+export const getSearchSelector = (state: RootState) => state.search;
+
+export const store = configureStore({
+  reducer: {
+    search: searchSlice.reducer,
+  },
+
+});
 
 
-export const { changeSearch } = searchSlice.actions;
-export const getSearchSelector = (state: RootState) => initialState.topic;
-export default searchSlice.reducer;
-
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export default store;

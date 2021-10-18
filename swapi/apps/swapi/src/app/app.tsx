@@ -1,12 +1,12 @@
 import styles from './app.module.scss';
 
-import { NavBar, Content } from '@swapi/ui';
+import { NavBar, FetchAllData } from '@swapi/ui';
 
 export function App() {
   return (
     <div className={styles.app}>
       <NavBar />
-      <Content />
+      <FetchAllData />
 
     </div>
   );

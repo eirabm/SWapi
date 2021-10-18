@@ -14,8 +14,8 @@ export function NavBar(props: NavBarProps) {
   return (
     <div>
       <div className={styles.toggleSearch}>
-        <p onClick={()=>{dispatch(changeSearch({payload: 'People' }))}}>People</p>
-        <p onClick={()=>{dispatch(changeSearch({payload: 'Species' }))}}>Species</p>
+        <p onClick={()=>{dispatch(changeSearch('people'))}}>People</p>
+        <p onClick={()=>{dispatch(changeSearch('species'))}}>Species</p>
       </div>
         <TextField
           id="Searcher"
