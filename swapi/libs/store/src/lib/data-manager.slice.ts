@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector} from "@reduxjs/toolkit";
 import { configureStore } from '@reduxjs/toolkit';
-import { swApi } from "..";
 
 export interface searchBy {
   topic: string,
@@ -15,7 +14,7 @@ const initialState: searchBy = {
 };
 
 const searchSlice = createSlice({
-  name: 'searchBy',
+  name: 'search',
   initialState,
   reducers: {
     changeSearch: (state, action) => {
@@ -23,11 +22,17 @@ const searchSlice = createSlice({
     },
     changeSort: (state, action) => {
       state.sortBy = action.payload
-    }
+    },
+    nextPage: (state) => {
+      state.actualPage++;
+     },
+     prevPage: (state) => {
+      state.actualPage--;
+     }
   }
 })
 
-export const { changeSearch, changeSort } = searchSlice.actions;
+export const { changeSearch, changeSort, nextPage, prevPage } = searchSlice.actions;
 export const getSearchSelector = (state: RootState) => state.search;
 
 export const store = configureStore({

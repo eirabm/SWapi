@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { current } from 'immer';
 import { useState } from 'react';
 import styles from './content.module.scss';
-
 import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
+
+import { getSearchSelector } from '@swapi/store'
 
 
 interface RenderDataProps {
@@ -11,7 +12,8 @@ interface RenderDataProps {
 }
 
 export const RenderData = (props: RenderDataProps) => {
-  const allData = props.data;
+
+  const allData = props.data
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
 
@@ -19,24 +21,27 @@ export const RenderData = (props: RenderDataProps) => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = allData.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(allData.length / itemsPerPage)
-
-  console.log(totalPages)
   
   return (
     <>
-      {currentData.map((item) => (
-        <div className = {styles.characterCard} key = {item.name}>
-          <h3>{item.name}</h3>
-          {item.gender ? (<p>{item.gender.toUpperCase()}</p>) : ''}
-        </div>
-      ))}
-            <Button variant="text" 
-            onClick={()=>{setCurrentPage(currentPage -1)}}
-            disabled={currentPage === 1}>Prev</Button>
-            <Button variant="text" 
-            onClick={()=>{setCurrentPage(currentPage +1)}}
-            disabled={currentPage === totalPages}>Next</Button>
+      <div className={styles.content}>
+        {currentData.map((item) => (
+          <div className = {styles.characterCard} key = {item.name}>
+            <h3>{item.name}</h3>
+            {item.gender ? (<p>{item.gender.toUpperCase()}</p>) : ''}
+          </div>
+        ))}
+      </div>
+      <div className={styles.pagination}>
+        <Button variant="text" 
+          onClick={()=>{setCurrentPage(currentPage -1)}}
+          disabled={currentPage === 1}>Prev</Button>
+        <Button variant="text" 
+          onClick={()=>{setCurrentPage(currentPage +1)}}
+          disabled={currentPage === totalPages}>Next</Button>
+        <p>PAGE {currentPage}</p>
 
+      </div>
     </>
   )
 }

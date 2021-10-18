@@ -1,9 +1,5 @@
-.toggleSearch {
+.sort {
   display: flex;
   flex-direction: row;
-  float: right, top;
-  p {
-    margin: 10px;
-    cursor: pointer;
-  }
+  align-items: baseline;
 }

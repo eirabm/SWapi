@@ -3,8 +3,6 @@
 }
 .app {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   background-image: linear-gradient(
       rgba(0, 23, 45, 0.85),
@@ -18,4 +16,21 @@
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+
+  .toggleSearch {
+    min-width: 100vh;
+    float: right;
+    margin: 50px;
+    margin-left: 85%;
+
+    .inactive {
+      text-decoration: none;
+      margin: 5px;
+      color: darkgrey;
+    }
+
+    .selected {
+      color: aliceblue;
+    }
+  }
 }

@@ -1,14 +1,27 @@
 .content {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 30px;
+  align-items: center;
+  justify-content: center;
 
   .characterCard {
+    justify-content: center;
+
     margin: 20px;
     padding: 20px;
     text-align: center;
 
     img {
+      margin: 10px;
+    }
+  }
+
+  .pagination {
+    justify-content: center;
+
+    p {
+      font-size: 14px;
       margin: 10px;
     }
   }

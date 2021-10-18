@@ -4,10 +4,12 @@ import styles from './content.module.scss';
 import { RenderData } from './RenderData';
 
 /* eslint-disable-next-line */
-export interface FetchAllDataProps {}
+export interface FetchAllDataProps {
+  route: string,
+}
 
 export function FetchAllData(props: FetchAllDataProps) {
-  const [searchBy, setSearchBy]= useState('people')
+  const searchBy = props.route
   const [page, setPage] = useState(1)
   const [skip, setSkip] = useState(false)
   const [apiData, setApiData] = useState<any>([])
@@ -30,7 +32,7 @@ export function FetchAllData(props: FetchAllDataProps) {
   }
 
   return (
-    <div className={styles.content}>
+    <div>
       {skip && <RenderData data={apiData} />}
     </div>
   );
