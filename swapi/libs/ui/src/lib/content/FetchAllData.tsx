@@ -32,9 +32,9 @@ export function FetchAllData(props: FetchAllDataProps) {
   }
 
   return (
-    <div>
+    <>
       {skip && <RenderData data={apiData} />}
-    </div>
+    </>
   );
 }
 

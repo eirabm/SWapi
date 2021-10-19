@@ -20,9 +20,9 @@ export function Content(props: ContentProps) {
   return (
     <div className={styles.content}>
       <NavBar updateSearch={updateSearch} />
-
-     {search ? (<FetchSearch searchValue={search} />) : (<FetchAllData route={props.route}/>)} 
-
+      <div className={styles.renderedContent}>
+        {search ? (<FetchSearch searchValue={search} />) : (<FetchAllData route={props.route}/>)} 
+      </div>
     </div>
   );
 }

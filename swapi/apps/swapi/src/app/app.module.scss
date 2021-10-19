@@ -19,9 +19,8 @@
 
   .toggleSearch {
     min-width: 100vh;
-    float: right;
     margin: 50px;
-    margin-left: 85%;
+    justify-content: flex-end;
 
     .inactive {
       text-decoration: none;

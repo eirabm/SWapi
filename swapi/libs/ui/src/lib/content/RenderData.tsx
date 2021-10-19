@@ -3,7 +3,6 @@ import { useState } from 'react';
 import styles from './content.module.scss';
 import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
-
 import { getSearchSelector } from '@swapi/store'
 
 
@@ -12,6 +11,8 @@ interface RenderDataProps {
 }
 
 export const RenderData = (props: RenderDataProps) => {
+
+  console.log(useSelector(getSearchSelector))
 
   const allData = props.data
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +25,7 @@ export const RenderData = (props: RenderDataProps) => {
   
   return (
     <>
-      <div className={styles.content}>
+      <div className={styles.items}>
         {currentData.map((item) => (
           <div className = {styles.characterCard} key = {item.name}>
             <h3>{item.name}</h3>

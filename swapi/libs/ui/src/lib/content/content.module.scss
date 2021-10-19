@@ -4,25 +4,36 @@
   padding: 30px;
   align-items: center;
   justify-content: center;
+  margin: 100px;
 
-  .characterCard {
-    justify-content: center;
-
-    margin: 20px;
+  .renderedContent {
+    margin: 60px;
     padding: 20px;
-    text-align: center;
 
-    img {
-      margin: 10px;
+    .items {
+      display: flex;
+      flex-direction: row;
     }
-  }
 
-  .pagination {
-    justify-content: center;
+    .characterCard {
+      justify-content: center;
 
-    p {
-      font-size: 14px;
-      margin: 10px;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+
+      img {
+        margin: 10px;
+      }
+    }
+
+    .pagination {
+      justify-content: center;
+
+      p {
+        font-size: 14px;
+        margin: 10px;
+      }
     }
   }
 }

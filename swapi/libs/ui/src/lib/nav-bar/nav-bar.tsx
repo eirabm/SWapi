@@ -5,7 +5,6 @@ import Button, { ButtonProps } from '@mui/material/Button';
 
 
 import { useDispatch } from "react-redux";
-import { changeSearch } from '@swapi/store'
 
 
 /* eslint-disable-next-line */

@@ -19,9 +19,9 @@ export function FetchSearch(props: FetchSearchProps) {
   }
 
   return (
-    <div>
+    <>
       {data && <RenderData data={data.results} />}
-    </div>
+    </>
   );
 }
 
