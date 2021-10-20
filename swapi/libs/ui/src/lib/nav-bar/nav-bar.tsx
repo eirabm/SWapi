@@ -3,21 +3,24 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
 
-
-import { useDispatch } from "react-redux";
-
+import { useDispatch } from 'react-redux';
+import { changeSort } from '@swapi/store';
 
 /* eslint-disable-next-line */
 export interface NavBarProps {
-  updateSearch: (newValue:string) => void
+  route: string;
+  updateSearch: (newValue: string) => void;
 }
 
 export function NavBar(props: NavBarProps) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  props.route === 'species' ? dispatch(changeSort('name')) : '';
 
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: 'white',
-    backgroundColor: 'rgba(54, 53, 70, 0.7)', 
+    backgroundColor: 'rgba(54, 53, 70, 0.7)',
     margin: '5px',
     '&:hover': {
       backgroundColor: '#ff366e',
@@ -29,17 +32,26 @@ export function NavBar(props: NavBarProps) {
       <div className={styles.sort}>
         <TextField
           id="Searcher"
-          placeholder="Search people..."
-          inputProps={{ style: { borderRadius: "4px", background: "white", width: "200px"}}}
-          onChange={(e)=>{props.updateSearch(e.target.value)}}
+          placeholder={`Search ${props.route}...`}
+          inputProps={{
+            style: { borderRadius: '4px', background: 'white', width: '200px' },
+          }}
+          onChange={(e) => {
+            props.updateSearch(e.target.value);
+          }}
         />
-        <p>SORT BY   </p>
-          <ColorButton onClick={()=>console.log('name')}>
-            NAME
-          </ColorButton>
-          <ColorButton onClick={()=>console.log('gender')}>
+        <p>SORT BY </p>
+        <ColorButton onClick={() => dispatch(changeSort('name'))}>
+          NAME
+        </ColorButton>
+
+        {props.route !== 'species' ? (
+          <ColorButton onClick={() => dispatch(changeSort('gender'))}>
             GENDER
           </ColorButton>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

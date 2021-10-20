@@ -9,6 +9,7 @@ import styles from './content.module.scss';
 import { RenderData } from './RenderData';
 
 export interface FetchAllDataProps {
+  searchValue: string;
   route: string;
 }
 
@@ -39,7 +40,9 @@ export function FetchAllData(props: FetchAllDataProps) {
     }
   }
 
-  return <>{skip && <RenderData data={apiData} />}</>;
+  return (
+    <>{skip && <RenderData data={apiData} search={props.searchValue} />}</>
+  );
 }
 
 export default FetchAllData;

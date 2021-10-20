@@ -7,20 +7,31 @@ import { getSearchSelector, nextPage, prevPage } from '@swapi/store';
 
 interface RenderDataProps {
   data: any[];
+  search: string;
 }
 
 export const RenderData = (props: RenderDataProps) => {
   const dispatch = useDispatch();
   const searchState = useSelector(getSearchSelector);
 
-  const allData = props.data;
+  const sortBy = searchState.sortBy;
+
+  const allData = props.data.sort((a, b) =>
+    a[sortBy] < b[sortBy] ? -1 : a[sortBy] > b[sortBy] ? 1 : 0
+  );
+
+  const renderData = props.search
+    ? allData.filter((item) =>
+        item.name.toLowerCase().includes(props.search.toLowerCase())
+      )
+    : allData;
   const currentPage = searchState.actualPage;
   const [itemsPerPage] = useState(4);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = allData.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(allData.length / itemsPerPage);
+  const currentData = renderData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(renderData.length / itemsPerPage);
 
   return (
     <>
