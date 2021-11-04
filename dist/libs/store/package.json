@@ -1,0 +1,11 @@
+{
+  "name": "@swapi/store",
+  "version": "0.0.1",
+  "main": "./store.umd.js",
+  "module": "./store.esm.js",
+  "typings": "./index.d.ts",
+  "dependencies": {},
+  "peerDependencies": {
+    "@reduxjs/toolkit": "^1.6.2"
+  }
+}
