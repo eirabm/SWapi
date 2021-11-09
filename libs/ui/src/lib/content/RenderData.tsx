@@ -44,24 +44,26 @@ export const RenderData = (props: RenderDataProps) => {
         ))}
       </div>
       <div className={styles.pagination}>
-        <Button
-          variant="text"
-          onClick={() => {
-            dispatch(prevPage());
-          }}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </Button>
-        <Button
-          variant="text"
-          onClick={() => {
-            dispatch(nextPage());
-          }}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </Button>
+        <div>
+          <Button
+            variant="text"
+            onClick={() => {
+              dispatch(prevPage());
+            }}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </Button>
+          <Button
+            variant="text"
+            onClick={() => {
+              dispatch(nextPage());
+            }}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </Button>
+        </div>
         <p>PAGE {currentPage}</p>
       </div>
     </>
